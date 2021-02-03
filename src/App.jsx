@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { Header } from './components/Header';
+import './components/sass/App.scss';
 
 const App = () => {
 	
@@ -7,15 +9,27 @@ const App = () => {
 		getCrypto();
 	}, []);
 
-
+	const printInfo = async resp => {
+		console.log(resp);
+		if (!resp.value) {
+			console.log('Error');
+			return;
+		}
+		//const price = JSON.parse(resp.value);
+		//console.log(price['bitcoin']['usd']);
+	}
+	
 	const getCrypto = async () => {
+		// Download the cached Bitcoin price data
 		const resp = await fetch('/getcrypto', {method: 'POST', headers: {'Content-Type': 'application/json'}});
-		const r = await resp.json();
-		console.log(`BTC: ${Object.getOwnPropertyNames(JSON.parse(r['status']['text'])['data']['BTC'])}`);
-		console.log(`ETH: ${Object.getOwnPropertyNames(JSON.parse(r['status']['text'])['data']['ETH'])}`);
+		// parse the json
+		const json = await resp.json();
+		printInfo(json);
 	}
 
-	return (<div>{"This is an app, bitch!"}</div>);
+	return (<div>
+	<Header/>
+	{"This is an app, bitch!"}</div>);
 }
 
 ReactDOM.render(<App/>, document.getElementById('root'));
