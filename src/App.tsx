@@ -19,6 +19,11 @@ const App = () => {
 	const printInfo = async resp => {
 		// FIXME: filter out Bitcoin, Ethereum, LiteCoin, Algorand, FileCoin, Dash, Zcash, DAI, Monero, Uniswap, Chainlink, Cardano, Tether, Stellar, Polkadot
 		const values = JSON.parse(resp['value']);
+		console.log(`Values: ${values}`);
+		if (!values) {
+			console.log('No values found.');
+			return;
+		}
 		const filtered = values.filter(filterTokens);
 		console.log(filtered);
 		await updateCryptos(filtered);

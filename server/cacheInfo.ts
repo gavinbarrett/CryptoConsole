@@ -7,22 +7,42 @@ redisClient.on('error', err => { if (err) console.log(`Error: ${err}`) });
 
 const getFromCache = async (id: string) => {
 	/* Retrieve the data from memory */
-	return redisClient.get(id);
+	return new Promise((resolve, reject) => {
+		redisClient.get(id, async (err, res) => {
+			if (err || !res) resolve(null);
+			resolve(res);
+		});
+	});
 }
 
 const setInCache = async (id: string, value: string) => {
 	/* Set the data in memory */
-	return redisClient.set(id, value);
+	return new Promise((resolve, reject) => {
+		redisClient.set(id, value, async (err, res) => {
+			if (err) resolve(null);
+			resolve(true);
+		});
+	});
 }
 
 const checkInCache = async (id: string) => {
 	/* Check if a key exists */
-	return redisClient.exists(id);
+	return new Promise((resolve, reject) => {
+		redisClient.exists(id, (err, res) => {
+			if (err || !res) resolve(false);
+			resolve(true);
+		});
+	});
 }
 
 const deleteFromCache = async (id: string) => {
 	/* Delete key from Redis cache */
-	return redisClient.del(id);
+	return new Promise((resolve, reject) => {
+		redisClient.del(id, (err, res) => {
+			if (res === 1) resolve(true);
+			resolve(false);
+		});
+	});
 }
 
-export {getFromCache, setInCache}
+export {getFromCache, setInCache, checkInCache, deleteFromCache}
