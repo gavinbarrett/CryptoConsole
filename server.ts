@@ -1,6 +1,5 @@
 const express = require('express');
-const superagent = require('superagent');
-const { getCrypto } = require('./server/getCrypto.js');
+const { getCrypto } = require('./server/getCrypto.ts');
 const app = express();
 const port = 5000;
 // include files from the dist folder

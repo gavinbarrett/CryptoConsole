@@ -1,5 +1,5 @@
 module.exports = {
-	entry: './src/App.jsx',
+	entry: './src/App.tsx',
 	mode: 'development',
 	module: {
 		rules: [
@@ -29,14 +29,14 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(js|jsx)$/,
+				test: /\.(js|ts|tsx)$/,
 				exclude: /node_modules/,
-				use: ['babel-loader'],
+				use: ['ts-loader'],
 			},
 		],
 	},
 	resolve: {
-		extensions: ['.js', '.jsx']
+		extensions: ['.ts', '.js', '.tsx']
 	},
 	output: {
 		filename: 'App.js',
