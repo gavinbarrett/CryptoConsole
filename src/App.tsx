@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Header } from './components/Header';
+import { CryptoDigest } from './components/CryptoDigest';
 import './components/sass/App.scss';
 
 const App = () => {
@@ -39,7 +40,7 @@ const App = () => {
 
 	return (<div>
 	<Header/>
-	{cryptos ? cryptos.map(c => (<p>{c['name']} is at {c['current_price']}</p>)): ''}
+	{cryptos ? cryptos.map(c => <CryptoDigest coin={c['name']} price={c['current_price']}/>): ''}
 	</div>);
 }
 
