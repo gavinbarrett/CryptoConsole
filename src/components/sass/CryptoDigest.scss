@@ -4,23 +4,36 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	background: green;
 	border-size: border-box;
-	border: 1px solid blue;
 	font-family: 'Share Tech Mono', monospace;
 	font-size: 2vw;
 	color: #f7ede2;
 	padding-right: 30%;
 }
 
+.crypto-digest:hover {
+	animation-name: animateDigest;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-in-out;
+	cursor: pointer;
+}
+
 .crypto-info {
 	display: flex;
 	width: 28vw;
 	height: 8vh;
-	background: blue;
+	margin-left: 1%;
+	margin-right: 1%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.crypto-logo {
+	width: 3vw;
+	height: 6vh;
+	margin-left: 1%;
 }
 
 .crypto-name {
@@ -33,4 +46,9 @@
 	width: 15vw;
 	height: 8vh;
 	background: pink;
+}
+
+@keyframes animateDigest {
+	from { background: #003049 }
+	to { background: #5b8fab; }
 }

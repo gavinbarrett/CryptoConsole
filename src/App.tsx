@@ -7,25 +7,31 @@ import './components/sass/App.scss';
 const App = () => {
 
 	const [cryptos, updateCryptos] = React.useState([]);
-	const tokens = ['Bitcoin', 'Ethereum', 'Litecoin', 'Chainlink', 'Cardano', 'Algorand', 'Filecoin', 'Dash', 'Dai', 'Monero', 'Uniswap', 'Polkadot'];
+	const desiredTokens = ['Bitcoin', 'Ethereum', 'Litecoin', 'Chainlink', 'Cardano', 'Algorand', 'Filecoin', 'Dash', 'Dai', 'Monero', 'Uniswap', 'Polkadot'];
 
 	React.useEffect(() => {
 		getCrypto();
 	}, []);
 
 	const filterTokens = tokenName => {
-		return tokens.includes(tokenName['name']);
+		// filter out any tokens that aren't in the token array
+		return desiredTokens.includes(tokenName['name']);
 	}
 
-	const printInfo = async resp => {
+	const displayCryptoData = async resp => {
 		// FIXME: filter out Bitcoin, Ethereum, LiteCoin, Algorand, FileCoin, Dash, Zcash, DAI, Monero, Uniswap, Chainlink, Cardano, Tether, Stellar, Polkadot
 		const values = JSON.parse(resp['value']);
-		/* id,symbol,name,image,current_price,market_cap,market_cap_rank,fully_diluted_valuation,total_volume,high_24h,low_24h,price_change_24h,price_change_percentage_24h,market_cap_change_24h,market_cap_change_percentage_24h,circulating_supply,total_supply,max_supply,ath,ath_change_percentage,ath_date,atl,atl_change_percentage,atl_date,roi,last_updated */
+		/* Keys for the response['value'] object:
+		
+		id,symbol,name,image,current_price,market_cap,market_cap_rank,fully_diluted_valuation,total_volume,high_24h,low_24h,price_change_24h,price_change_percentage_24h,market_cap_change_24h,market_cap_change_percentage_24h,circulating_supply,total_supply,max_supply,ath,ath_change_percentage,ath_date,atl,atl_change_percentage,atl_date,roi,last_updated
+		
+		*/
+		
 		if (!values)
 			return;
+		// filter out the coins we care about
 		const filtered = values.filter(filterTokens);
-		for (let i in filtered)
-			console.log(filtered[i]['image']);
+		// update array of displayed cryptocurrencies
 		await updateCryptos(filtered);
 	}
 	
@@ -34,12 +40,12 @@ const App = () => {
 		const resp = await fetch('/getcrypto', {method: 'POST', headers: {'Content-Type': 'application/json'}});
 		// parse the json
 		const json = await resp.json();
-		printInfo(json);
+		displayCryptoData(json);
 	}
 
 	return (<div>
 	<Header/>
-	{cryptos ? cryptos.map((cr, index) => <CryptoDigest key={index} coin={cr['name']} price={cr['current_price']}/>): 'Loading cryptos...'}
+	{cryptos ? cryptos.map((cr, index) => <CryptoDigest key={index} coin={cr['name']} price={cr['current_price']}/>) : 'Loading cryptos...'}
 	</div>);
 }
 

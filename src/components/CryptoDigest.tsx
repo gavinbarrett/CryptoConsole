@@ -19,6 +19,7 @@ const BasicInfo = ({coin, price}) => {
 
 export const CryptoDigest = ({coin, price}: Digest) => {
 	return (<div className='crypto-digest'>
+		<img className='crypto-logo' src={`./assets/${coin}.png`}/>
 		<BasicInfo coin={coin} price={price}/>
 	</div>);
 }
