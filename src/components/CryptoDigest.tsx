@@ -6,8 +6,19 @@ type Digest = {
 	price: number,
 };
 
+const BasicInfo = ({coin, price}) => {
+	return (<div className='crypto-info'>
+		<div className='coin-name'>
+			{coin}
+		</div>
+		<div className='coin-price'>
+			{`$${price.toString()}`}
+		</div>
+	</div>);
+}
+
 export const CryptoDigest = ({coin, price}: Digest) => {
-	return (<div className='cryptodigest'>
-		{`${coin} is currently at ${price}.`}
+	return (<div className='crypto-digest'>
+		<BasicInfo coin={coin} price={price}/>
 	</div>);
 }

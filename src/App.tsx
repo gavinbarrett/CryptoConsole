@@ -7,7 +7,7 @@ import './components/sass/App.scss';
 const App = () => {
 
 	const [cryptos, updateCryptos] = React.useState([]);
-	const tokens = ['Bitcoin', 'Ethereum', 'Litecoin', 'Chainlink', 'Cardano', 'Algorand', 'Filecoin', 'Dash', 'Dai', 'Monero', 'Stellar', 'Tether', 'Uniswap', 'Polkadot'];
+	const tokens = ['Bitcoin', 'Ethereum', 'Litecoin', 'Chainlink', 'Cardano', 'Algorand', 'Filecoin', 'Dash', 'Dai', 'Monero', 'Uniswap', 'Polkadot'];
 
 	React.useEffect(() => {
 		getCrypto();
@@ -20,13 +20,12 @@ const App = () => {
 	const printInfo = async resp => {
 		// FIXME: filter out Bitcoin, Ethereum, LiteCoin, Algorand, FileCoin, Dash, Zcash, DAI, Monero, Uniswap, Chainlink, Cardano, Tether, Stellar, Polkadot
 		const values = JSON.parse(resp['value']);
-		console.log(`Values: ${values}`);
-		if (!values) {
-			console.log('No values found.');
+		/* id,symbol,name,image,current_price,market_cap,market_cap_rank,fully_diluted_valuation,total_volume,high_24h,low_24h,price_change_24h,price_change_percentage_24h,market_cap_change_24h,market_cap_change_percentage_24h,circulating_supply,total_supply,max_supply,ath,ath_change_percentage,ath_date,atl,atl_change_percentage,atl_date,roi,last_updated */
+		if (!values)
 			return;
-		}
 		const filtered = values.filter(filterTokens);
-		console.log(filtered);
+		for (let i in filtered)
+			console.log(filtered[i]['image']);
 		await updateCryptos(filtered);
 	}
 	
@@ -40,7 +39,7 @@ const App = () => {
 
 	return (<div>
 	<Header/>
-	{cryptos ? cryptos.map(c => <CryptoDigest coin={c['name']} price={c['current_price']}/>): ''}
+	{cryptos ? cryptos.map((cr, index) => <CryptoDigest key={index} coin={cr['name']} price={cr['current_price']}/>): 'Loading cryptos...'}
 	</div>);
 }
 

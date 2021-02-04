@@ -1,9 +1,36 @@
-.cryptodigest {
+.crypto-digest {
 	width: 100vw;
-	height: 5vh;
+	height: 10vh;
 	display: flex;
 	align-items: center;
+	justify-content: flex-start;
 	background: green;
 	border-size: border-box;
 	border: 1px solid blue;
+	font-family: 'Share Tech Mono', monospace;
+	font-size: 2vw;
+	color: #f7ede2;
+	padding-right: 30%;
+}
+
+.crypto-info {
+	display: flex;
+	width: 28vw;
+	height: 8vh;
+	background: blue;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.crypto-name {
+	width: 15vw;
+	height: 8vh;
+	background: yellow;
+}
+
+.crypto-price {
+	width: 15vw;
+	height: 8vh;
+	background: pink;
 }
