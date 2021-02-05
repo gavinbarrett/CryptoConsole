@@ -2,7 +2,17 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Header } from './components/Header';
 import { CryptoDigest } from './components/CryptoDigest';
+import { Footer } from './components/Footer';
 import './components/sass/App.scss';
+
+const DigestArray = ({cryptos}) => {
+	return(<>
+	{cryptos ? cryptos.map((security, index) => {
+		let { name: coin, current_price: price, market_cap_rank: market_rank, price_change_24h: change, price_change_percentage_24h: change_percent, circulating_supply: circulating, total_supply: total, low_24h: low, high_24h: high } = security;
+		return <CryptoDigest key={index} coin={coin} price={price} market_rank={market_rank} change={change} change_percent={change_percent} circulating={circulating} total={total} low={low} high={high}/>
+	}) : 'Loading cryptos...'}
+	</>);
+}
 
 const App = () => {
 	const [cryptos, updateCryptos] = React.useState([]);
@@ -40,13 +50,11 @@ const App = () => {
 		displayCryptoData(json);
 	}
 
-	return (<div>
-	<Header/>
-	{cryptos ? cryptos.map((security, index) => {
-		let { name: coin, current_price: price, market_cap_rank: market_rank, price_change_24h: change, price_change_percentage_24h: change_percent, circulating_supply: circulating, total_supply: total, low_24h: low, high_24h: high } = security;
-		return <CryptoDigest key={index} coin={coin} price={price} market_rank={market_rank} change={change} change_percent={change_percent} circulating={circulating} total={total} low={low} high={high}/>
-	}) : 'Loading cryptos...'}
-	</div>);
+	return (<>
+		<Header/>
+			<DigestArray cryptos={cryptos}/>
+		<Footer/>
+	</>);
 }
 
 ReactDOM.render(<App/>, document.getElementById('root'));

@@ -29,6 +29,10 @@ module.exports = {
 				]
 			},
 			{
+				test: /\.webp$/,
+				use: ['url-loader']
+			},
+			{
 				test: /\.(js|ts|tsx)$/,
 				exclude: /node_modules/,
 				use: ['ts-loader'],

@@ -14,13 +14,6 @@ type Digest = {
 };
 
 export const CryptoDigest = ({coin, price, market_rank, change, change_percent, circulating, total, low, high}: Digest) => {
-	
-	React.useEffect(() => {
-		console.log(`Coin: ${coin}`);
-		console.log(`Circulating: ${circulating.toString()}`);
-		(total) ? console.log(`Total: ${total}`) : console.log(`No coin cap.`);
-	}, []);
-
 	return (<div className='crypto-digest'>
 		<img className='crypto-logo' src={`./assets/${coin}.png`}/>
 		<div className='crypto-info'>

@@ -1,0 +1,34 @@
+footer {
+	width: 100vw;
+	height: 15vh;
+	background: #001d2b;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.footer-box {
+	font-family: 'Share Tech Mono', monospace;
+	margin: 2%;
+	color: #f7ede2;
+}
+
+.footer-item {
+	cursor: pointer;
+	color: #f7ede2;
+	transition: all 0.3s ease-in-out;
+}
+
+.footer-item:hover {
+	color: #215773;
+}
+
+.footer-link {
+	text-decoration: none;
+	color: #f7ede2;
+	transition: all 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+	color: #215773;
+}
