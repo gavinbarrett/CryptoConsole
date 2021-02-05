@@ -1,6 +1,9 @@
+$line-height: 10vh;
+$back: #215773;
+
 .crypto-digest {
 	width: 100vw;
-	height: 10vh;
+	height: $line-height;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
@@ -9,20 +12,18 @@
 	font-size: 2vw;
 	color: #f7ede2;
 	padding-right: 30%;
+	transition: all 0.5s ease-in-out;
 }
 
 .crypto-digest:hover {
-	animation-name: animateDigest;
-	animation-duration: 1s;
-	animation-fill-mode: forwards;
-	animation-timing-function: ease-in-out;
-	cursor: pointer;
+	background: #215773;
+	cursor: default;
 }
 
 .crypto-info {
 	display: flex;
 	width: 28vw;
-	height: 8vh;
+	height: $line-height;
 	margin-left: 1%;
 	margin-right: 1%;
 	display: flex;
@@ -38,17 +39,90 @@
 
 .crypto-name {
 	width: 15vw;
-	height: 8vh;
+	height: $line-height;
 	background: yellow;
 }
 
 .crypto-price {
 	width: 15vw;
-	height: 8vh;
+	height: $line-height;
 	background: pink;
 }
 
-@keyframes animateDigest {
-	from { background: #003049 }
-	to { background: #5b8fab; }
+.market-flux {
+	width: 22vw;
+	height: $line-height;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.circulating-supply {
+	width: 25vw;
+	height: $line-height;
+}
+
+.arrow {
+	width: 10px;
+	height: 10px;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.arrow-up {
+	border-right: 4px solid green;
+	border-bottom: 4px solid green;
+	transform: rotate(-135deg);
+}
+
+.arrow-down {
+	border-right: 4px solid red;
+	border-bottom: 4px solid red;
+	transform: rotate(45deg);
+}
+
+.market-cap {
+	width: 20vw;
+	height: $line-height;
+	background: green;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 2%;
+}
+
+.market-rank {
+	width: 5vw;
+	height: $line-height;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 1%;
+}
+
+.percent-mined {
+	width: 10vw;
+	height: $line-height;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 1%;
+}
+
+.high-24 {
+	width: 12vw;
+	height: $line-height;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 1%;
+}
+
+.low-24 {
+	width: 12vw;
+	height: $line-height;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 1%;
 }
