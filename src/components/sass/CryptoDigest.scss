@@ -5,17 +5,43 @@ $back: #215773;
 	width: 100vw;
 	height: $line-height;
 	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	border-size: border-box;
-	font-family: 'Share Tech Mono', monospace;
-	font-size: 2vw;
-	color: #f7ede2;
-	padding-right: 30%;
+	flex-direction: column;
 	transition: all 0.5s ease-in-out;
 }
 
 .crypto-digest:hover {
+	background: #215773;
+	cursor: default;
+}
+
+.crypto-expand {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	border-size: border-box;
+	font-family: 'Share Tech Mono', monospace;
+	font-size: 1rem;
+	color: #f7ede2;
+	//padding-right: 30%;
+}
+
+.extra-info {
+	display: none;
+	opacity: 0;
+	transition: all 0.2s ease-in-out;
+}
+
+.extra-active {
+	display: flex;
+	opacity: 1;
+	font-family: 'Share Tech Mono', monospace;
+	font-size: 1rem;
+	color: #f7ede2;
+	transition: all 0.2s ease-in-out;
+}
+
+.active-digest {
+	height: $line-height + 15vh;
 	background: #215773;
 	cursor: default;
 }
@@ -92,7 +118,7 @@ $back: #215773;
 }
 
 .market-rank {
-	width: 5vw;
+	width: 45vw;
 	height: $line-height;
 	display: flex;
 	align-items: center;
@@ -101,7 +127,7 @@ $back: #215773;
 }
 
 .percent-mined {
-	width: 10vw;
+	width: 45vw;
 	height: $line-height;
 	display: flex;
 	align-items: center;

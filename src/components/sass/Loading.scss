@@ -1,0 +1,33 @@
+.loading-screen {
+	width: 100vw;
+	height: 75vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loading-text {
+	color: #f7ede2;
+	font-size: 2vw;
+	font-family: 'Press Start 2P';
+}
+
+.loading-box {
+	width: 5vw;
+	height: 20vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loading-image {
+	width: 100%;
+	height: auto;
+	animation: loadingAnimation 2s infinite;
+}
+
+
+@keyframes loadingAnimation {
+	100% { transform: rotate(360deg); }
+}
+

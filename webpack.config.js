@@ -29,7 +29,7 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.webp$/,
+				test: /\.(png|webp)$/,
 				use: ['url-loader']
 			},
 			{
