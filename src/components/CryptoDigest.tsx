@@ -16,7 +16,6 @@ type Digest = {
 };
 
 export const CryptoDigest = ({coin, active, updateActive, price, market_rank, change, change_percent, circulating, total, low, high}: Digest) => {
-	console.log(`Coin: ${coin}\nActive: ${active}`);
 	const [act, updateAct] = React.useState('');
 	const [expanded, updateExpanded] = React.useState('');
 
