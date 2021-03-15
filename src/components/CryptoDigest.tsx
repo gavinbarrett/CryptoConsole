@@ -41,7 +41,7 @@ export const CryptoDigest = ({coin, active, updateActive, price, market_rank, ch
 				</div>
 			</div>
 			<div className="market-flux" title="Market Flux">
-				{(Math.sign(change) > 0) ? <div className="arrow arrow-up"/> : <div className="arrow arrow-down"/>}
+				{(Math.sign(change) > 0) ? <div className="arrow arrow-up">{"\u27A4"}</div> : <div className="arrow arrow-down">{"\u27A4"}</div>}
 				{`${change_percent.toFixed(3)}% (${change.toFixed(2)})`}
 			</div>
 			<div className="low-24" title="Daily Minima">
