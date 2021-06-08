@@ -17,7 +17,7 @@ const getFromCache = async (id: string) => {
 
 const setInCache = async (id: string, value: string) => {
 	/* Set the data in memory */
-	const expiry = 60;
+	const expiry = 2;
 	return new Promise((resolve, reject) => {
 		redisClient.set(id, value, 'EX', expiry, async (err, res) => {
 			if (err) resolve(null);
@@ -46,4 +46,4 @@ const deleteFromCache = async (id: string) => {
 	});
 }
 
-export {getFromCache, setInCache, checkInCache, deleteFromCache}
+export { getFromCache, setInCache, checkInCache, deleteFromCache }

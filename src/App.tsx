@@ -18,35 +18,43 @@ const DigestArray = ({cryptos, active, updateActive}) => {
 const App = () => {
 	const [active, updateActive] = React.useState('');
 	const [cryptos, updateCryptos] = React.useState([]);
-	const desiredTokens = ['Bitcoin', 'Ethereum', 'Litecoin', 'Chainlink', 'Cardano', 'Algorand', 'Filecoin', 'Dash', 'Monero', 'Uniswap', 'Polkadot'];
+	const [wsocket, updateWSocket] = React.useState(new WebSocket('ws://192.168.1.98:8080/'));
 
 	React.useEffect(() => {
-		// download cryptosecurity data from the server cache
-		getCrypto();
+		console.log('Refreshing page again.');
+		wsConnect();
+		return () => {
+			wsocket.close();
+		}
 	}, []);
 
-	const filterTokens = tokenName => {
-		// filter out any tokens that aren't in the token array
-		return desiredTokens.includes(tokenName['name']);
+	const wsConnect = async () => {
+		console.log('Running wsConnect function.');
+		wsocket.onopen = () => {
+			console.log('Connected to the server!');
+		}
+		wsocket.onmessage = message => {
+			displayCryptoData(message.data);
+			wsocket.send("Thanks for the info.");
+		}
+		wsocket.onerror = err => {
+			console.log(`There was an error: ${err}`);
+		}
+		wsocket.onclose = () => {
+			console.log('Closing socket connection.');
+		}
 	}
 
 	const displayCryptoData = async resp => {
 		// FIXME: filter out Bitcoin, Ethereum, LiteCoin, Algorand, FileCoin, Dash, Zcash, DAI, Monero, Uniswap, Chainlink, Cardano, Tether, Stellar, Polkadot
-		const values = JSON.parse(resp['value']);
+		console.log('Updating crypto data.');
+		const values = JSON.parse(resp);
 		if (!values)
 			return;
 		// filter out the coins we care about
-		const filtered = values.filter(filterTokens);
+		//const filtered = values.filter(filterTokens);
 		// update array of displayed cryptocurrencies
-		await updateCryptos(filtered);
-	}
-	
-	const getCrypto = async () => {
-		// Download the cached Bitcoin price data
-		const resp = await fetch('/getcrypto', {method: 'POST', headers: {'Content-Type': 'application/json'}});
-		// parse the json
-		const json = await resp.json();
-		displayCryptoData(json);
+		updateCryptos(values);
 	}
 
 	return (<>
