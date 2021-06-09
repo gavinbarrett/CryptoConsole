@@ -24,5 +24,5 @@ In the future, CryptoConsole will likely be updated to include:
 ## Demo
 
 <p align='center'>
-<img src="assets/cc_demo.png" width="700px">
+<img src="dist/assets/cc_demo.png" width="700px">
 </p>
