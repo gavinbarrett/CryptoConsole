@@ -6,7 +6,7 @@ import { Loading } from './components/Loading';
 import { Footer } from './components/Footer';
 import './components/sass/App.scss';
 
-const WSContext = React.createContext(new WebSocket('wss://cryptoconsole.site:8080/'));
+const WSContext = React.createContext(new WebSocket('wss://cryptoconsole.site:443/'));
 
 const DigestArray = ({cryptos, active, updateActive}) => {
 	return(<>
@@ -59,7 +59,7 @@ const Page = () => {
 }
 
 const App = () => {
-	const [wsocket, updateWSocket] = React.useState(new WebSocket('wss://cryptoconsole.site:8080/'));
+	const [wsocket, updateWSocket] = React.useState(new WebSocket('wss://cryptoconsole.site:443/'));
 	return (<WSContext.Provider value={wsocket}>
 		<Page/>
 	</WSContext.Provider>);
