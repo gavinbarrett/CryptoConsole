@@ -2,9 +2,7 @@ import * as express from 'express';
 import * as WebSocket from 'ws';
 import { getCrypto } from './server/getCrypto';
 const app = express();
-const port = 5000;
-
-const ws = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 8080 });
 
 // avoid leaking Express server info
 app.disable('x-powered-by');
@@ -16,7 +14,7 @@ const filterTokens = tokenName => {
 	return desiredTokens.includes(tokenName['name']);
 }
 
-ws.on('connection', async (ws:WebSocket, req) => {
+wss.on('connection', async (ws:WebSocket, req) => {
 	// establish connection
 	console.log('Client connected.');
 	//console.log(req.client);
@@ -40,6 +38,6 @@ ws.on('connection', async (ws:WebSocket, req) => {
 	});
 });
 
-app.listen(port, () => {
-	console.log(`Listening on port ${port}`);
+app.listen(5000, () => {
+	console.log(`Listening on port 5000.`)
 });
