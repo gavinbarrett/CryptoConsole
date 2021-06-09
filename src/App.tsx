@@ -6,8 +6,6 @@ import { Loading } from './components/Loading';
 import { Footer } from './components/Footer';
 import './components/sass/App.scss';
 
-const WSContext = React.createContext(new WebSocket('wss://cryptoconsole.site/source'));
-
 const DigestArray = ({cryptos, active, updateActive}) => {
 	return(<>
 	{cryptos ? cryptos.map((security, index) => {
@@ -17,33 +15,32 @@ const DigestArray = ({cryptos, active, updateActive}) => {
 	</>);
 }
 
-const Page = () => {
+const Page = ({wsocket}) => {
 	const [active, updateActive] = React.useState('');
 	const [cryptos, updateCryptos] = React.useState([]);
-	const wsocket = React.useContext(WSContext);
 
 	React.useEffect(() => {
 		// set up WebSocket event handlers
 		wsConnect();
 	}, []);
+
 	const wsConnect = async () => {
-		wsocket.onopen = () => {
+		wsocket.current.onopen = () => {
 			console.log('Connected to the server!');
 		}
-		wsocket.onmessage = message => {
+		wsocket.current.onmessage = message => {
 			// update displayed crypto data
 			displayCryptoData(message.data);
 		}
-		wsocket.onerror = err => {
+		wsocket.current.onerror = err => {
 			console.log(`There was an error: ${err}`);
 		}
-		wsocket.onclose = () => {
+		wsocket.current.onclose = () => {
 			console.log('Closing socket connection.');
 		}
 	}
+
 	const displayCryptoData = async resp => {
-		// FIXME: filter out Bitcoin, Ethereum, LiteCoin, Algorand, FileCoin, Dash, Zcash, DAI, Monero, Uniswap, Chainlink, Cardano, Tether, Stellar, Polkadot
-		console.log('Updating crypto data.');
 		const values = JSON.parse(resp);
 		if (!values)
 			return;
@@ -59,10 +56,10 @@ const Page = () => {
 }
 
 const App = () => {
-	const [wsocket, updateWSocket] = React.useState(new WebSocket('wss://cryptoconsole.site/source'));
-	return (<WSContext.Provider value={wsocket}>
-		<Page/>
-	</WSContext.Provider>);
+	// connect to the WebSocket handler
+	const wsocket = React.useRef(new WebSocket('wss://cryptoconsole.site/source'));
+	// load application
+	return <Page wsocket={wsocket}/>;
 }
 
 ReactDOM.render(<App/>, document.getElementById('root'));
