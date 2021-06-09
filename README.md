@@ -20,3 +20,9 @@ In the future, CryptoConsole will likely be updated to include:
 - More descriptive information on the displayed cryptocurrencies
 - A larger set of cryptocurrencies to be tracked (e.g. including the Nano currency)
 - The move to a stateful application where users can customize the cryptocurrencies they see
+
+## Demo
+
+<p align='center'>
+	<img src="assets/cc_demo.png" width="700px">
+</p>
