@@ -20,18 +20,17 @@ ws.on('connection', async (ws:WebSocket, req) => {
 	// establish connection
 	console.log('Client connected.');
 	//console.log(req.client);
-	const up = async () => {
+	const pulse_data = async () => {
+		// download crypto data
 		const resp = await getCrypto();
+		// filter for desired projects
 		const values = resp.body.filter(filterTokens);
+		// send data to the client
 		ws.send(JSON.stringify(values));
-		setTimeout(up, 5000);
+		// recur after 5 seconds
+		setTimeout(pulse_data, 5000);
 	}
-	up();
-	
-	ws.on('message', message => {
-		console.log(`Message received.`);
-	});
-	
+	pulse_data();
 	ws.on('error', err => {
 		console.log(`An error occurred: ${err}`);
 	});
