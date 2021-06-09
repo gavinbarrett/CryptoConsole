@@ -10,7 +10,9 @@ This project is made possible by the incredible API available at [CoinGecko](htt
 ## Stream CryptoConsole's Data
 
 The WebSocket handler can be used as a programmatic API. If you wanted to make use of CryptoConsole's data, you could request it like this:
-    $ websocat "wss://cryptoconsole.site/source"
+```bash
+$ websocat "wss://cryptoconsole.site/source"
+```
 
 ## Future Roadmap
 
