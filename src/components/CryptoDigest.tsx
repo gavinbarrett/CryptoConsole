@@ -18,6 +18,13 @@ type Digest = {
 export const CryptoDigest = ({coin, active, updateActive, price, market_rank, change, change_percent, circulating, total, low, high}: Digest) => {
 	const [act, updateAct] = React.useState('');
 	const [expanded, updateExpanded] = React.useState('');
+	const [direction, updateDirection] = React.useState((Math.sign(change) > 0) ? '' : 'arrow-down');
+
+	
+	React.useEffect(() => {
+		find_direction();
+	}, [change]);
+	
 
 	const displayFullDigest = () => {
 		if (act) {
@@ -27,6 +34,13 @@ export const CryptoDigest = ({coin, active, updateActive, price, market_rank, ch
 			updateAct('active-digest');
 			updateExpanded('extra-active');
 		}
+	}
+
+	const find_direction = () => {
+		if (Math.sign(change) <= 0) 
+			updateDirection('arrow-down');
+		else
+			updateDirection('');
 	}
 
 	return (<div className={`crypto-digest ${act}`} onClick={displayFullDigest}>
@@ -41,7 +55,8 @@ export const CryptoDigest = ({coin, active, updateActive, price, market_rank, ch
 				</div>
 			</div>
 			<div className="market-flux" title="Market Flux">
-				{(Math.sign(change) > 0) ? <div className="arrow arrow-up">{"\u27A4"}</div> : <div className="arrow arrow-down">{"\u27A4"}</div>}
+				{/*{(Math.sign(change) > 0) ? <div className="arrow arrow-up">{"\u27A4"}</div> : <div className="arrow arrow-down">{"\u27A4"}</div>}*/}
+				{<div className={`arrow arrow-up ${direction}`}>{"\u27A4"}</div>}
 				{`${change_percent.toFixed(3)}% (${change.toFixed(2)})`}
 			</div>
 			<div className="low-24" title="Daily Minima">
