@@ -83,7 +83,12 @@ $back: #215773;
 .crypto-price {
 	width: 15vw;
 	height: $line-height;
-	background: pink;
+	color: white;
+}
+
+.coin-price {
+	color: white;
+	transition: all 0.2s ease-in-out;
 }
 
 .market-flux {
@@ -92,6 +97,8 @@ $back: #215773;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+	color: white;
+	transition: all 0.2s ease-in-out;
 }
 
 .circulating-supply {
@@ -114,6 +121,16 @@ $back: #215773;
 	color: red;
 	transform: rotate(90deg);
 	transition: all 0.7s ease-in;
+}
+
+.dec-color {
+	color: red;
+	transition: all 0.1s ease-in;
+}
+
+.inc-color {
+	color: green;
+	transition: all 0.1s ease-in;
 }
 
 .market-cap {

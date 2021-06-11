@@ -19,13 +19,16 @@ export const CryptoDigest = ({coin, active, updateActive, price, market_rank, ch
 	const [act, updateAct] = React.useState('');
 	const [expanded, updateExpanded] = React.useState('');
 	const [direction, updateDirection] = React.useState((Math.sign(change) > 0) ? '' : 'arrow-down');
+	const [dirColor, updateDirColor] = React.useState('');
+	const initialRender = React.useRef(true);
 
-	
 	React.useEffect(() => {
-		find_direction();
+		if (initialRender.current)
+			initialRender.current = false;
+		else
+			find_direction();
 	}, [change]);
 	
-
 	const displayFullDigest = () => {
 		if (act) {
 			updateAct('')
@@ -37,10 +40,18 @@ export const CryptoDigest = ({coin, active, updateActive, price, market_rank, ch
 	}
 
 	const find_direction = () => {
-		if (Math.sign(change) <= 0) 
+		/* set dynamic css classes for arrow and price transitions */
+		if (Math.sign(change) <= 0) {
 			updateDirection('arrow-down');
-		else
+			updateDirColor('dec-color');
+			// remove class
+			setTimeout(() => updateDirColor(''), 350);
+		} else {
 			updateDirection('');
+			updateDirColor('inc-color');
+			// remove class
+			setTimeout(() => updateDirColor(''), 350);
+		}
 	}
 
 	return (<div className={`crypto-digest ${act}`} onClick={displayFullDigest}>
@@ -50,12 +61,11 @@ export const CryptoDigest = ({coin, active, updateActive, price, market_rank, ch
 				<div className="coin-name">
 					{coin}
 				</div>
-				<div className="coin-price" title="Coin Price">
+				<div className={`coin-price ${dirColor}`} title="Coin Price">
 					{`$${price.toFixed(3)}`}
 				</div>
 			</div>
-			<div className="market-flux" title="Market Flux">
-				{/*{(Math.sign(change) > 0) ? <div className="arrow arrow-up">{"\u27A4"}</div> : <div className="arrow arrow-down">{"\u27A4"}</div>}*/}
+			<div className={`market-flux ${dirColor}`} title="Market Flux">
 				{<div className={`arrow arrow-up ${direction}`}>{"\u27A4"}</div>}
 				{`${change_percent.toFixed(3)}% (${change.toFixed(2)})`}
 			</div>
